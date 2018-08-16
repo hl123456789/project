@@ -1,0 +1,450 @@
+/* css reset */
+html{
+	width: 100%;
+	width: 100%;
+	/*min-width: 1600px;*/
+}
+body,p{
+	margin: 0px;
+	padding:0px;
+}
+body{
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	background-color: #454545;
+/*	overflow-x: hidden;
+	overflow-y: hidden;*/
+	font-size: 12px;
+	font-family:sans-serif;
+}
+ul{
+	margin: 0px;
+	padding:0px;
+}
+li{
+	list-style: none;
+}
+.wrapper{
+	width: 100%;
+}
+a{ 
+	text-decoration:none;
+	color: #FFF; 
+}
+
+/***********left-menu***********/
+.left-menu{
+	width: 180px;
+	height: 885px;
+	float: left;
+	background-color: #535353;
+	border-right-style: solid;
+	border-right-color:#FFEB00;
+	border-right-width: 3px;
+}
+.nemu-i-title{
+	width: 100%;
+	height: 50px;
+	font-size: 14px;
+	position: relative;
+	background-color: #454545;
+}
+.nemu-i-title p.title-left2{
+	color:#FFEB00;
+}
+.nemu-i-title span{
+	position: absolute;
+	top: 12px;
+	right: 10px;
+	color: #fff;
+}
+.nemu-i-title p{
+	margin-left: 10px;
+	margin-top: 5px;
+	color: #FFF;
+}
+.nemu-i-time{	
+	height: 45px;
+	width: 100%;
+	background-color: #333333;
+	border-bottom:2px solid #535353;
+}
+.nemu-i-time p{
+	height: 45px;
+	line-height: 45px;
+	color: #fff;
+	margin-left: 10px;
+}
+.nemu-i-time p span{
+	color: #FFEB00;
+}
+.nemu-i-varlent{
+	height:35px;
+	padding-left: 9px;
+	font-size: 14px;
+	padding-top: 5px;
+	font-weight: bold;
+}
+.nemu-i-varlent p{
+	color: #fff;
+}
+.nemu-i-button{
+	height: 50px;
+	width: 94.44%;
+	margin: 10px 10px;
+	position: relative;
+	float: left;
+	background-color:#535353;
+}
+.button-about{
+	background-color: #454545;
+	height: 50px;
+	width: 70%;
+	margin-left: 10px;
+	float: left;
+	position: relative;
+}
+.button-i{
+	padding-top: 15px;
+	width: 10%;
+	float: left;
+	padding-left: 10px;
+	position: absolute;
+	font-weight: bold;
+}
+.button-box{
+	background-color:#333333;
+	height: 28px;
+	width: 65%;
+	margin-left: 30px;
+	text-align: center;
+	margin-top:9px;
+	position: absolute;
+	float: left;
+	padding-top: 5px;
+}
+.button-box span{
+	margin-top: 0;
+}
+.nemu-i-button a{
+	display: inline-block;
+	width: 100%;
+	height: 50px;
+}
+.button-p{
+	background: #333;
+	font-weight: bold;
+	width: 20px;
+	height: 20px;
+	float: left;
+	position: absolute;
+	right: 10px;
+	margin-top: 15px;
+	border-radius: 15px;
+	padding-bottom: 0px;
+	text-align:center;
+	line-height: 17px;
+}
+.button-p span{
+	margin-top: 3px;
+}
+
+.nemu-i-button a:hover{
+	background-color:#FFEB00;
+}
+a:hover .button-about{
+	background-color:#FFEB00;
+}
+a:hover .button-i span{
+	color: #000;
+}
+a:hover .button-p{
+	background-color: #000;
+}
+a:hover .button-pi{
+	color: #FFEB00;
+}
+
+/***********left-menu***********/
+/***********left-menu2***********/
+#left-menu2{
+	overflow: hidden;
+}
+
+.left-menu2{
+	width: 260px;
+	height: 885px;
+	float: left;
+	position: relative;
+	background-color: #454545;
+}
+.sort-cases{
+	height: 45px;
+	font-size: 14px;
+	float: left;
+}
+.case-by{
+	width: 80px;
+	padding-left: 25px;
+	float: left;
+	padding-top: 10px;
+}
+.case-by span{
+	color: #fff;
+	font-size: 10px;
+}
+.case-select{
+	right: 0;
+	float: left;
+	margin-top: 12px;
+}
+.select-op{
+	width: 145px;
+	padding-right: 3px;
+	float: left;
+    color:#FFEB00;
+    background: transparent;
+    border:none;
+    outline: none;
+}
+.button-select{
+	width: 240px;
+	height:45px;
+	margin-left: 15px;
+	background-color: red;
+	position: relative;
+	margin-top: 46px;
+}
+.search_input input[type='text']{
+    display: inline-block;
+    width: 241px;
+    padding-left: 10px;
+    background-color: #000;
+    height: 42px;
+	font-size: 14px;
+	font-weight: normal;
+	font-family:sans-serif;
+	color: #FFF;
+	border:0.5px solid #000;
+}
+.search_input input:focus {
+    outline: none;
+}
+.search_input input[type='text']:focus{
+    border: 0px;
+    border-color: #000;
+}
+.search_input {
+    width: 241px;
+	height:45px;
+	margin-left: 15px;
+	margin-top: 45px;
+	position: relative;
+}
+.search_input i{
+    position: absolute;
+    top: 15px;
+    right: 20px;  /*// 这里更改图标的位置*/
+    color: #FFF;/*//这里可以更改图标的颜色*/
+}
+/***********二级菜单*****************/
+.menudiv{
+	width: 264px;
+	height: 90%;
+	float:left;
+	margin-top: 0;
+	margin-left: 15px;
+	position: relative;
+	overflow-x:hidden;
+	overflow-y:auto; 
+}
+.menudiv a{
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+}
+.menu-for{
+	width: 243px;
+	height: 40px;
+	border: 1px solid #454545;
+	float: left;
+	position: relative;
+}
+.menu-for-left{
+	width: 100%;
+	height: 40PX;
+	padding-left: 10px;
+	position: absolute;
+	float: left;
+	line-height: 14px;
+	padding-top: 0;
+	background-color: #4D4D4D;
+}
+.menu-for-left p{
+	font-size: 14px;
+	margin-top: 6px;
+	color:#F7F7F7;
+}
+.menu-for-left .p-but{
+	font-size: 10px;
+	color: #9B9B9B;
+
+}
+.menu-for-r{
+	margin-left: 210px;
+	width: 23px;
+	position: absolute;
+	float: left;
+	padding-right: 1px;
+	background-color: #4D4D4D;
+}
+.menu-for a:hover{
+	background-color:#333333;
+}
+a:hover .menu-for-left{
+	background-color:#333333;
+}
+a:hover .menu-for-r{
+	background-color:#333333;
+}
+a:hover .menu-for-left p{
+	color: #C5B80F;
+}
+a:hover .menu-for-left p1{
+	color: #C5B80F;
+}
+a:hover .menu-for-r p{
+	color: #C5B80F;
+}
+/***********二级菜单*****************/
+/***********left-menu2***********/
+/***********right-cotent***********/
+
+.right-content{
+	/*width: 78.125%;*/
+	height: 885px;
+	background-color: #454545;
+	margin-left: 440px;	
+	left: 0;
+	padding-left: 10px;
+}
+.right-content1{
+	
+	height: 885px;
+	/*float: left;*/
+	background-color: #454545;
+
+}
+.sort-title{
+	width: 100%;
+	height: 45px;
+	padding-left: 15px;
+	font-size: 14px;
+	position: relative;
+	
+}
+.sort-title1{
+	width: 80%;
+	height: 45px;
+	padding-top: 15px;
+}
+.sort-title1 span{
+	color: #FFEB00;
+}
+.sort-title2{
+	width: 20%;
+	height: 45px;
+	float: left;
+	padding-top: 10px;
+	padding-left:20px; 
+	position: absolute;
+	top: 0;
+	right: -250px;
+}
+
+.sort-title span{
+	font-weight: bold;
+}
+.content-con{
+	width: 100%;
+	height: 300px;
+	background-color: #F5F5F5;
+	margin-left: 15px;
+	position: relative;
+}
+.content-con img{
+	width: 80%;
+	height: 300px;
+	float: left;
+}
+.content-des{
+	padding-top: 25px;
+	width: 20%;
+	height: 300px;
+	line-height: 25px;
+	position: absolute;
+	float: left;
+	right: -50px;
+}
+.content-des p{
+	color: #989898;
+	font-size: 12px;
+}
+.content-des span{
+	color: #4D4D4D;
+	font-size: 14px;
+	font-weight: bold;
+}
+.content-table{
+	width: 100%;
+	margin-top: 7px;
+	padding-left: 14px;
+}
+.content-table table{
+	width: 100%;
+	border-collapse:collapse;
+	border-spacing:1;
+	border-spacing:0;
+}
+.content-table tr{
+	height: 40px;
+	width: 100%;
+	font-size: 12px;
+	font-family:sans-serif;
+	color: #FFF;
+	right: 0;
+/*1390*430*/
+}
+#otable th{
+	color: #C4C4C4;
+	background-color: #000;
+	text-align: left;
+	padding-left: 10px;
+	width: 225px;
+}
+#trr a{
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	text-decoration: none;
+	color:#FFF;
+	font-weight: normal; 
+}
+
+#otable th p{
+	padding-left: 100px;
+}
+.content-table td{
+	background-color: #FFFFFF;
+	color:#989898;
+	padding-left: 10px;
+
+	word-break: break-all; 
+	word-wrap:break-word;
+	
+	border-bottom:3px solid #D1D1D1;
+	font:500 14px Arial;
+}
+/***********right-cotent***********/
