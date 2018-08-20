@@ -2,6 +2,7 @@
 html{
 	width: 100%;
 	width: 100%;
+	overflow: hidden;
 }
 body,p{
 	margin: 0px;
@@ -327,37 +328,32 @@ a:hover .menu-for-r p{
 	padding-left: 10px;
 }
 .right-content1{
-	
 	height: 885px;
-	/*float: left;*/
 	background-color: #454545;
 
 }
 .sort-title{
-	width: 100%;
 	height: 45px;
-	padding-left: 15px;
 	font-size: 14px;
 	position: relative;
 	
 }
 .sort-title1{
-	width: 80%;
 	height: 45px;
 	padding-top: 15px;
+	margin-left: 15px;
+
 }
 .sort-title1 span{
 	color: #FFEB00;
 }
 .sort-title2{
-	width: 20%;
 	height: 45px;
-	float: left;
 	padding-top: 10px;
 	padding-left:20px; 
 	position: absolute;
 	top: 0;
-	right: -250px;
+	right: 10px;
 }
 
 .sort-title span{
@@ -376,13 +372,12 @@ a:hover .menu-for-r p{
 	float: left;
 }
 .content-des{
-	padding-top: 25px;
-	width: 20%;
+	margin-top: 25px;
 	height: 300px;
 	line-height: 25px;
 	position: absolute;
 	float: left;
-	right: -50px;
+	right: 25px;
 }
 .content-des p{
 	color: #989898;
@@ -394,7 +389,6 @@ a:hover .menu-for-r p{
 	font-weight: bold;
 }
 .content-table{
-	width: 100%;
 	margin-top: 7px;
 	padding-left: 14px;
 }
