@@ -2,7 +2,6 @@
 html{
 	width: 100%;
 	width: 100%;
-	/*min-width: 1600px;*/
 }
 body,p{
 	margin: 0px;
@@ -14,8 +13,6 @@ body{
 	margin: 0px;
 	padding: 0px;
 	background-color: #454545;
-/*	overflow-x: hidden;
-	overflow-y: hidden;*/
 	font-size: 12px;
 	font-family:sans-serif;
 }
@@ -33,7 +30,6 @@ a{
 	text-decoration:none;
 	color: #FFF; 
 }
-
 /***********left-menu***********/
 .left-menu{
 	width: 180px;
@@ -415,7 +411,6 @@ a:hover .menu-for-r p{
 	font-family:sans-serif;
 	color: #FFF;
 	right: 0;
-/*1390*430*/
 }
 #otable th{
 	color: #C4C4C4;
