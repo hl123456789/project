@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/style2.css" />
+	<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+	<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+	
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+	<div id="wrapper" class="wrapper">
+		<!--*********left-menu*********-->
+		<div class="left-menu">
+			<div class="nemu-i-title">
+				<p>View process by</p>
+				<p class="title-left2">Absolute Frequency</p>		
+				<span class="title-i">></span>
+			</div>
+			<div id="" class="nemu-i-time"><p><span id="aa" style="font-weight: bold;"> {{avgs}}d </span>Avg Cycle Time</p></div>
+			<div id="menutime" class="nemu-i-time"><p><span style="font-weight: bold;">{{one}} </span>Of <span style="font-weight: bold;color: #fff">{{all}}</span>  variant</p></div>
+			<div class="nemu-i-varlent"><p>Top Ranked Varlent</p></div>
+			<ul id="menum" class="menum">
+				<li class='nemu-i-button'  v-for="(item,index) in toptens" @click="handleClick(index)" v-bind:class="{'backcolor1':flag==index}">
+					<a href="javascript:;">
+						<div class='button-about' v-bind:class="{'backcolor2':flag==index}">
+							<div class="button-i" v-bind:class="{'backcolor3':flag==index}"><span>{{item.rank}}</span></div>							
+							<div class="button-box"><span>{{item.percentage | percent}}</span></div>
+							</div>
+						<div class="button-p" v-bind:class="{'backcolor4':flag==index}">
+							<span>i</span> </div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<!--*********left-menu*********-->
+		<!--*********left-menu*********-->
+		<div id="left-menu2" class="left-menu2"  v-show="show1">
+			<div class="sort-cases">
+				<div class="case-by"><span>Sort cases by</span></div>
+				<div class="case-select">
+					<select id="select-op" class="select-op" v-model="selected" @change="selectedCase()" >
+						<option v-for="option in options" v-bind:value="option.value">
+						   {{ option.text }}
+						</option>
+  					</select>
+				</div>
+			</div>
+			<div class="search_input">	
+				<input id="i-advanced-search" type="text" placeholder="Cases(28)"   v-model="message" @keyup.enter="key()"  maxlength="100" /><!-- onkeypress="key()" -->
+				<i class="fa fa-search" id="i-advanced-search-i" @click="serchClick(message)"></i>
+				
+			</div>
+				<ul id="menudiv" class="menudiv">
+					<li  class='menu-for' v-for="(ca,index2) in cases" :key="index2" @click="handleClick2(index2)" v-bind:class="{'back2color':flag2==index2}">
+				    	<a href="javascript:;">					 
+					     	<p>Case {{ca.id}}</p>
+					     	<p class='p-but' v-if="id">{{ca.duration | formatTime1}}</p>
+					     	<p class='p-but' v-else-if="start">{{formatDate3(ca.start)}}</p>
+					     	<p class='p-but' v-else-if="end">{{(ca.end)}}</p>
+					     	<p class='p-but' v-else>{{ca.duration | formatTime1}}</p>
+					    	<span>></span>				   
+					    </a>
+					</li>
+			 </ul>
+		</div>
+		<!--*********left-menu*********-->
+		<!--*********right*********-->
+		<div  class="right-content"  v-show="show2">
+		<div id="right-content1"  class="right-content1" >
+			<div class="sort-title" >
+				<div id="sort-title1" class="sort-title1"><span>Case {{title1}},({{title2 | formatTime1}})<!-- Case 1(5 hours,20 minute) --></span></div>
+				<div class="sort-title2"><img src="img/close.png" @click="close"></div>
+			</div>
+			<div class="content-con">
+				<img src="img/table.png">
+				<div id="content-des" class="content-des">
+					<p>Total Duration<br/><span>{{tduration | formatTime1}}</span><br/>Total Activities<span><br/>{{tactivities}}<br/></span>Case Start Time<br/>
+						<span>{{formatDate3(tstart)}}</span><br/>Case End Time<br/><span>{{formatDate3(tend)}}</span></p>
+				</div>
+			</div>
+			<div class="content-table" >
+				<table id="otable" >
+				 <tr id="trr">
+				 	<th v-for="(t,index3) of contable"><a href="javascript:;"> {{t.title}}			 							 	
+						 	<i class="icon iconfont icon-vertical_line" style="float: right;"></i>
+						 	<div class="con-li">
+						 		<i class="icon iconfont icon-paixu-shengxu" @click="asc(index3)" v-bind:class="{'licolor':flag3==index3}"></i>
+						 		<i class="icon iconfont icon-paixu-jiangxu" @click="dsc(index3)" v-bind:class="{'licolor':flag3==index3}"></i>
+						 	</div>				
+					 	</a>
+				    </th>
+				 </tr>
+					<tbody id="tb">
+						<tr v-for="(s,index4) of contbody">
+							<td>{{s.name}}</td>
+							<td>{{formatDate3(s.start)}}</td>
+							<td>{{formatDate3(s.end)}}</td>
+							<td>{{s.waitingTime}} minutes</td>
+							<td>{{s.duration | formatTime1}}</td>
+							<td>{{s.userName}}</td>
+						</tr>
+					</tbody>
+                </table>
+			</div>
+		</div>
+		</div>
+		<!--*********right*********-->
+	</div>
+
+<script src="js/style.vue.js"></script>
+</body>
+</html>

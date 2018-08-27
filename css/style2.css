@@ -38,11 +38,9 @@ a{
 /***********left-menu***********/
 .left-menu{
 	width: 180px;
-	/*height: 885px;*/
 	height: 100%;
 	float: left;
 	background-color: #535353;
-	/*background-color: red;*/
 	border-right-style: solid;
 	border-right-color:#FFEB00;
 	border-right-width: 3px;
@@ -50,7 +48,7 @@ a{
 .nemu-i-title{
 	width: 100%;
 	height: 50px;
-	font-size: 14px;
+	overflow:hidden;
 	position: relative;
 	background-color: #454545;
 }
@@ -71,6 +69,7 @@ a{
 .nemu-i-time{	
 	height: 45px;
 	width: 100%;
+	overflow:hidden;
 	background-color: #333333;
 	border-bottom:2px solid #535353;
 }
@@ -88,6 +87,7 @@ a{
 	padding-left: 9px;
 	font-size: 14px;
 	padding-top: 5px;
+	overflow:hidden;
 	font-weight: bold;
 }
 .nemu-i-varlent p{
@@ -166,11 +166,28 @@ a:hover .button-about{
 a:hover .button-i span{
 	color: #000;
 }
+a:hover .button-box span{
+	color:#fff;
+}
 a:hover .button-p{
 	background-color: #000;
+	
 }
-a:hover .button-pi{
+a:hover .button-p span{
 	color: #FFEB00;
+}
+.backcolor1{
+	background-color: #FFEB00;
+}
+.backcolor2{
+	background-color: #FFEB00;
+}
+.backcolor3{
+	color:#000;
+}
+.backcolor4{
+	color:#FFEB00;
+	background-color: #000;
 }
 
 /***********left-menu***********/
@@ -191,9 +208,11 @@ a:hover .button-pi{
 	height: 45px;
 	font-size: 14px;
 	float: left;
+	overflow:hidden;
 }
 .case-by{
-	width: 80px;
+	
+	width: 90px;
 	padding-left: 25px;
 	float: left;
 	padding-top: 10px;
@@ -258,7 +277,7 @@ a:hover .button-pi{
 }
 /***********二级菜单*****************/
 .menudiv{
-	width: 264px;
+	width: 260px;
 	height: 100%;
 	float:left;
 	margin-top: 0;
@@ -272,59 +291,53 @@ a:hover .button-pi{
 	width: 100%;
 	height: 100%;
 }
+
 .menu-for{
 	width: 243px;
 	height: 40px;
 	border: 1px solid #454545;
 	float: left;
 	position: relative;
-}
-.menu-for-left{
-	width: 100%;
-	height: 40PX;
-	padding-left: 10px;
-	position: absolute;
-	float: left;
-	line-height: 14px;
-	padding-top: 0;
+	overflow:hidden; 
 	background-color: #4D4D4D;
 }
-.menu-for-left p{
-	font-size: 14px;
-	margin-top: 6px;
-	color:#F7F7F7;
+.menu-for p{
+	margin-left: 10px;
+	margin-top: 3px;
+	color: #F7F7F7;
 }
-.menu-for-left .p-but{
+.menu-for p.p-but{
 	font-size: 10px;
+	margin-top: 0px;
 	color: #9B9B9B;
-
 }
-.menu-for-r{
-	margin-left: 210px;
-	width: 23px;
+.menu-for span{
 	position: absolute;
-	float: left;
-	padding-right: 1px;
-	background-color: #4D4D4D;
+	top: 12px;
+	right: 10px;
+	color: #F7F7F7;
 }
 .menu-for a:hover{
 	background-color:#333333;
 }
-a:hover .menu-for-left{
+a:hover  p{
+	color: #C5B80F;
+}
+a:hover  p.p-but{
+	color: #C5B80F;
+}
+a:hover span{
+	color: #C5B80F;
+}
+
+.back2color{
 	background-color:#333333;
+	color:  #C5B80F;
 }
-a:hover .menu-for-r{
-	background-color:#333333;
+.back2color2{
+	color:  #C5B80F;
 }
-a:hover .menu-for-left p{
-	color: #C5B80F;
-}
-a:hover .menu-for-left p1{
-	color: #C5B80F;
-}
-a:hover .menu-for-r p{
-	color: #C5B80F;
-}
+
 /***********二级菜单*****************/
 /***********left-menu2***********/
 /***********right-cotent***********/
@@ -387,7 +400,10 @@ a:hover .menu-for-r p{
 	line-height: 25px;
 	position: absolute;
 	float: left;
-	right: 25px;
+	margin-left: 82%;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
 }
 .content-des p{
 	color: #989898;
@@ -422,6 +438,7 @@ a:hover .menu-for-r p{
 	text-align: left;
 	padding-left: 10px;
 	width: 225px;
+	position: relative;
 }
 #trr a{
 	display: inline-block;
@@ -434,16 +451,28 @@ a:hover .menu-for-r p{
 
 #otable th p{
 	padding-left: 100px;
+
 }
 .content-table td{
 	background-color: #FFFFFF;
 	color:#989898;
 	padding-left: 10px;
-
 	word-break: break-all; 
 	word-wrap:break-word;
-	
 	border-bottom:3px solid #D1D1D1;
 	font:500 14px Arial;
+}
+.con-li{
+	position: absolute;
+	width: 20px;
+	float: right;
+	right: 10px;
+	top: 12px;
+	line-height: 8px;
+
+}
+.licolor:{
+	color:#C5B80F;
+	background-color: #C5B80F;
 }
 /***********right-cotent***********/

@@ -2,7 +2,7 @@
  * Created by lan.huang on 2018.
  */
 
-var data = {
+var data ={
 	"topTen":{
 	    "caseCount": 24578,
 	    "pathCount": 1872,
@@ -1645,163 +1645,164 @@ var data = {
 	]
 };
 
-//一级菜单
-var temp = document.getElementById('menum');
-var aMenuLi = temp.getElementsByTagName('li');
-var menudiv = document.getElementById('menudiv');
-var aLi = menudiv.getElementsByTagName('li');
-var at= menudiv.getElementsByTagName('a');
-var menutime=document.getElementById('menutime');
-//select选项排序
-var oselect = document.getElementById('select-op');
-var opt = oselect.getElementsByTagName('option');
-//搜索框
-var otext = document.getElementById('i-advanced-search');
-var obtnw = document.getElementById('i-advanced-search-i');
-//title
-var otitle = document.getElementById('sort-title1');
-var imgx = document.getElementById('imgx');
-var desc = document.getElementById('content-des');
-
-//table
-var otable = document.getElementById('otable');
-var tb = document.getElementById('tb');
-var ath=otable.getElementsByTagName('a');
-var trr = document.getElementById('trr');
-
-var str = "";
-
-for(var i=0;i<data.topTen.list.length;i++){
-	temp.innerHTML+="<li class='nemu-i-button' onclick='showMenu'><a href='javascript:;'><div class='button-about'>"
-						+"<div class='button-i'><span>"+data.topTen.list[i].rank+"</span></div><div class='button-box'><span>"
-						+(Math.round(data.topTen.list[i].percentage * 10000)/100).toFixed(2)+"%</span></div></div>"
-						+"<div class='button-p'><span>i</span> </div></a></li>";
-}
-//selection
-oselect.onchange = function(){
-	var index = oselect.selectedIndex;
-	var value = oselect.options[index].value;
-	menudiv.innerHTML = "";
-	data.case[oselect.id].list.sort(by(value)); 
-	//console.log(opt);
-	if(value=="id" || value=="duration"){
-		for(var attr in data.case[oselect.id].list){
-			//console.log(data.case[oselect.id].list[attr][value]);		
-			menudiv.innerHTML +="<li class='menu-for'><a href='javascript:;'><div class='menu-for-left'>"
-				     +"<p >Case "+data.case[oselect.id].list[attr].id+"<br/> <p1 class='p-but'>"+dateTime(data.case[oselect.id].list[attr].duration)
-				     +"</p1></p></div><div class='menu-for-r'><p>></p></div></a></li>";
-		}
-	}
-	else{
-		for(var attr in data.case[oselect.id].list){	
-			menudiv.innerHTML +="<li class='menu-for'><a href='javascript:;'><div class='menu-for-left'>"
-				     +"<p >Case "+data.case[oselect.id].list[attr].id+"<br/> <p1 class='p-but'>"+formatDate(data.case[oselect.id].list[attr][value])
-				     +"</p1></p></div><div class='menu-for-r'><p>></p></div></a></li>";
-		}
-	}
-}
-//二级菜单
-for(var i=0; i<aMenuLi.length; i++){
-	aMenuLi[i].index = i;
-	aMenuLi[i].onclick = function(){
-		//点击颜色改变
-		submitone();
-		var aDiv = this.getElementsByTagName('div');
-		var aP = this.getElementsByTagName('span');
-		var aL = this.getElementsByTagName('a');
-		aDiv[0].style.backgroundColor="#FFEB00";
-		aDiv[1].style.backgroundColor="#FFEB00";
-		aDiv[3].style.backgroundColor="#000";
-		aL[0].style.backgroundColor="#FFEB00";
-		aP[0].style.color="#000";
-		aP[2].style.color="#FFEB00";
-		//显示二级菜单
-		oselect.id=this.index;
-
-		document.getElementById('left-menu2').style.display="block"; 
-		menudiv.innerHTML = "";
-		str = (function(i){
-			data.case[i].list.sort(by("id"));
-			for(var x=0; x<data.case[i].list.length; x++){
-				menudiv.innerHTML +="<li class='menu-for'><a href='javascript:;'><div class='menu-for-left'>"
-					     +"<p >Case "+data.case[i].list[x].id+"<br/> <p1 class='p-but'>"+dateTime(data.case[i].list[x].duration)
-					     +"</p1></p></div><div class='menu-for-r'><p>></p></div></a></li>";
+var vm = new Vue({
+ 	el: '#wrapper',
+ 	data: {
+ 		one:0,
+ 		avg:avg(),
+ 		all:data.topTen.list.length,
+	    toptens: [],
+	    times:'',
+	    flag:-1,
+	    flag2:-1,
+	    flag3:-1,
+	    index1:'',
+	    index2:'',
+	    index3:'',
+	    index4:'',
+	    cases:[],  
+	    selected:'id',
+	    id:true,
+	    end:false,
+	    start:false,
+	    options: [
+		    { text: 'Case ID', value: 'id' },
+		    { text: 'Case Start', value: 'start' },
+		    { text: 'Case End', value: 'end' },
+		    { text: 'Case Duration', value: 'duration' }
+		    ],
+		message:'',
+		title1:'',
+		title2:'',
+		tduration:sum(),
+		tactivities:data.caseDetail.length,
+		tstart:tmin(),
+		tend:tmax(),
+		contable:[
+			{title:'Activity',name:'name'},
+			{title:'Sart Date/Time',name:'start'},
+			{title:'End Date/Time',name:'end'},
+			{title:'Waiting Time',name:'waitingTime'},
+			{title:'Tatol Duration',name:'duration'},
+			{title:'User Name',name:'userName'}
+			],
+		contbody:[],
+		show1:false,
+		show2:false,
+	  },
+	mounted:function(){
+		// this.$nextTick(function(){
+		// 	vm.handleClick();
+		// });// 
+		this.handleClick();
+		this.handleClick2();
+		this.serchClick();
+		this.content();
+		this.asc();
+		this.dsc();
+	  },
+	  watch:{
+	  	 message:function(){
+                this.message =  this.message.replace(/[^\d]/g,'');
+            }
+	  },
+ 	methods: {
+  		//一级菜单点击出现二级菜单
+		handleClick:function(index){		
+			this.flag = index;
+			var _this=this;
+			_this.index1=index;
+			_this.toptens= data.topTen.list;
+			_this.cases=data.case[index].list;
+			this.one= data.topTen.list[index].rank;
+			this.show1 = true
+		},
+		//selection
+		selectedCase:function(){
+			this.cases=this.cases.sort(by(this.selected));
+			//this.time=this.selected;
+			if(this.selected=='start'){
+				this.id=false;
+				this.start=true;
 			}
-			return menudiv.innerHTML;
-		})(this.index);
-		menudiv.innerHTML = str;
-	};
-}
-//搜索框
-obtnw.onclick=function(){
-	menudiv.innerHTML = "";
+			else if(this.selected=='end'){
+				this.id=false;
+				this.end=true;
+			}
+			else{
+				this.id=true;
+			}
+		},
+		handleClick2:function(index2){
+			this.index2=index2;
+			this.flag2 = index2;
+			this.title1=data.case[this.index1].list[index2].id;
+			this.title2=data.case[this.index1].list[index2].duration;
+			this.contbody=data.caseDetail;
+			this.show2=true
+		},
+		serchClick:function(message){
+			this.cases=data.case[this.index1].list;
+			this.cases=this.cases.filter(p=>p.id.indexOf(this.message)!==-1)
+		},
+		key:function(){
+			return this.serchClick();
+		},
+		asc:function(index3){
+			//alert("aa");
+			this.contbody=this.contbody.sort(by(this.contable[index3].name));
+		},
+		dsc:function(index3){
+			this.flag3=index3;
+			//this.contbody=this.contbody.sort(by(this.contable[index3].name));
+			this.contbody=this.contbody.sort(by2(this.contable[index3].name));
 
-	for(var x=0; x<data.case[oselect.id].list.length; x++){
-		if((data.case[oselect.id].list[x].id).indexOf(otext.value) > -1){	
-			menudiv.innerHTML +="<li class='menu-for'><a href='javascript:;'><div class='menu-for-left'>"
-				     +"<p >Case "+data.case[oselect.id].list[x].id+"<br/> <p1 class='p-but'>"+dateTime(data.case[oselect.id].list[x].duration)
-				     +"</p1></p></div><div class='menu-for-r'><p>></p></div></a></li>";
-		}
-	}	
-}
-//点击图片，隐藏content-right
-imgx.onclick=function(){
-	document.getElementById('right-content1').style.display="none"; 
-}
-//detail
-var m1;
-var s=0;
-var max;
-var min;
-menudiv.onmouseover=function(){
-	for(var m=0; m<aLi.length; m++){
-		aLi[m].index=m;
-		aLi[m].onclick = function(){
-			submittwo();
-			var aDiv2 = this.getElementsByTagName('div');
-			var aP2 = this.getElementsByTagName('p');
-			var aPi = this.getElementsByTagName('p1');
-			var aL2 = this.getElementsByTagName('a');
-			aDiv2[0].style.backgroundColor="#333333";
-			aDiv2[1].style.backgroundColor="#333333";
-			aL2[0].style.backgroundColor="#333333";
-			aPi[0].style.color="#C5B80F";
-			aP2[0].style.color="#C5B80F";
-			aP2[1].style.color="#C5B80F";
-			//title
-			m1=this.index;			
-			otitle.innerHTML="<span>Case "+data.case[oselect.id].list[m1].id+"("+dateTime(data.case[oselect.id].list[m1].duration)+")</span>";
-			//detail
-			document.getElementById('right-content1').style.display="block"; 
-			tb.innerHTML = "";
-			data.caseDetail.sort(by("name"));
-			for(var k=0;k<data.caseDetail.length;k++){
-				tb.innerHTML += "<tr><td>"+data.caseDetail[k].name+"</td><td>"+formatDate(data.caseDetail[k].start)+"</td>"
-				+"<td>"+formatDate(data.caseDetail[k].end)+"</td><td>"+data.caseDetail[k].waitingTime+"minutes</td>"
-				+"<td>"+data.caseDetail[k].duration+"minutes</td><td>"+data.caseDetail[k].userName+"</td></tr>";
+		},
+		//求和//max//min
+		content:function(){
 
-				s+=data.caseDetail[k].duration;
-			}	
-			//content-desc
-			desc.innerHTML="<p>Total Duration<br/><span>"+dateTime(s)+"</span><br/>Total Activities<span><br/>"+data.caseDetail.length+"<br/></span>Case Start Time<br/>"+
-			"<span>"+formatDate(result2)+"</span><br/>Case End Time<br/><span>"+formatDate(result)+"</span></p>";
+			this.tduration=Object.keys(data.caseDetail).length;
+		    this.tend =  Math.max(this.tend, data.caseDetail[this.index4].end);
+		    this.tstart =  Math.min(this.tstart, data.caseDetail[this.index4].start);
+		    this.tduration+=data.caseDetail[this.index4].duration;
+			
+		},
+		close:function(){
+			this.show2=false;
+			this.show1=false;
 		}
+
 	}
+});
+
+//时间戳 转换 days hours minute
+Vue.filter("formatTime1",function(value){
+	value=parseInt(value/1000);
+	if(value>=86400){
+		return Math.floor(value/86400) + ' day,' + Math.floor(value%86400/3600) + ' hours,' + Math.floor(value%86400%3600/60) + ' minutes,' + value%60 + 'seconds';
+	}else if(value<86400 && value>=3600){
+		return Math.floor(value/3600) + 'hours,' + Math.floor(value%3600/60) + ' minutes,' + value%60 + ' seconds';
+	}else {
+		return Math.floor(value/60) + 'minutes,' + value%60 + ' seconds';
+	} 
+}); 
+//时间戳 转换 2012-2-2 2:2:2    
+function add0(m){return m<10?'0'+m:m }
+function formatDate3(now){
+	var time = new Date(now);
+	var y = time.getFullYear();
+	var m = time.getMonth()+1;
+	var d = time.getDate();
+	var h = time.getHours();
+	var mm = time.getMinutes();
+	var s = time.getSeconds();
+	return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
 }
-//content排序
-for(var j=0;j<ath.length;j++){
-	ath[j].onclick=function(){	
-		var aname=this.name;
-		tb.innerHTML = "";
-		 data.caseDetail.sort(by(aname));
-		 for(var k=0;k<data.caseDetail.length;k++){
-		 	tb.innerHTML += "<tr><td>"+data.caseDetail[k].name+"</td><td>"+formatDate(data.caseDetail[k].start)+"</td>"
-		 	+"<td>"+formatDate(data.caseDetail[k].end)+"</td><td>"+data.caseDetail[k].waitingTime+"minutes</td>"
-		 	+"<td>"+data.caseDetail[k].duration+"minutes</td><td>"+data.caseDetail[k].userName+"</td></tr>";
-		 }
-	}
-}
-//排序
+//百分数
+Vue.filter("percent",function(value){
+	return (value * 100).toFixed(2)+'%';
+});
+//排序升序
 function by(name){  
     return function(o, p){  
         var a, b;  
@@ -1820,78 +1821,58 @@ function by(name){
             throw ("error");  
         }  
     }  
-}
-//时间戳 转换 2012-2-2 2:2:2    
-function add0(m){return m<10?'0'+m:m }
-function formatDate(now){
-	var time = new Date(now);
-	var y = time.getFullYear();
-	var m = time.getMonth()+1;
-	var d = time.getDate();
-	var h = time.getHours();
-	var mm = time.getMinutes();
-	var s = time.getSeconds();
-	return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
-}   
-//时间戳 转换 days hours minute
-function dateTime(datetime){
-	datetime=parseInt(datetime/1000);
-	if(datetime>=86400){
-		return Math.floor(datetime/86400) + ' day,' + Math.floor(datetime%86400/3600) + ' hours,' + Math.floor(datetime%86400%3600/60) + ' minutes,' + datetime%60 + 'seconds';
-	}else if(datetime<86400 && datetime>=3600){
-		return Math.floor(datetime/3600) + 'hours,' + Math.floor(datetime%3600/60) + ' minutes,' + datetime%60 + ' seconds';
-	}else {
-		return Math.floor(datetime/60) + 'minutes,' + datetime%60 + ' seconds';
-	}
-}  
-//一级菜单变色
-function submitone(){
-	for(i=0;i<aMenuLi.length;i++){
-		var aDiv = aMenuLi[i].getElementsByTagName('div');
-		var aP = aMenuLi[i].getElementsByTagName('span');
-		var aL = aMenuLi[i].getElementsByTagName('a');
-		aDiv[0].style.backgroundColor="";
-		aDiv[1].style.backgroundColor="";
-		aDiv[3].style.backgroundColor="";
-		aL[0].style.backgroundColor="";
-		aP[0].style.color="";
-		aP[2].style.color="";
-	}
+};
+//排序降序
+function by2(name){  
+    return function(o, p){  
+        var a, b;  
+        if (typeof o === "object" && typeof p === "object" && o && p) {  
+            a = o[name];  
+            b = p[name];  
+            if (b === a) {  
+                return 0;                 
+            }  
+            if (typeof b === typeof a) {  
+                return a < b ? 1 : -1;  
+            }  
+            return typeof a < typeof b ? 1 : -1;  
 
-}
-//二级菜单变色
-function submittwo(){
-	for(i=0;i<aLi.length;i++){
-		var aDiv2 = aLi[i].getElementsByTagName('div');
-		var aP2 = aLi[i].getElementsByTagName('p');
-		var aPi = aLi[i].getElementsByTagName('p1');
-		var aL2 = aLi[i].getElementsByTagName('a');
-		aDiv2[0].style.backgroundColor="";
-		aDiv2[1].style.backgroundColor="";
-		aL2[0].style.backgroundColor="";
-		aP2[0].style.color="";
-		aPi[0].style.color="";
-		aP2[1].style.color="";
+        }  
+        else {  
+            throw ("error");  
+        }  
+    } 
+};
+function sum(){
+	tduration=0;
+	for (var i in data.caseDetail) {
+		tduration+=data.caseDetail[i].duration;
 	}
-	
-}
-//搜索框回车
-function key(){
-	if(event.keyCode==13){
-		return obtnw.onclick();
-	}
+	return tduration;
 }
 //max
-var result = data.caseDetail[0].end;
-function tmath(){
-	for (var i = 1; i < data.caseDetail.length; i++) {
-	    result =  Math.max(result, data.caseDetail[i].end);
+
+function tmax(){
+	tend = data.caseDetail[0].end;
+	for (var i in data.caseDetail) {
+    	tend =  Math.max(tend, data.caseDetail[i].end);
 	}
+	return tend;
 }
-//min
 function tmin(){
-var result2 = data.caseDetail[0].start;
-	for (var i = 1; i < data.caseDetail.length; i++) {
-	    result2 =  Math.min(result2, data.caseDetail[i].start);
-	}	
+	tstart = data.caseDetail[0].start;
+	for (var i in data.caseDetail) {
+	    tstart =  Math.min(tstart, data.caseDetail[i].start);
+	}
+	return tstart;
+}
+function avg(){
+	avgs=0;
+	var s=0;
+	for(var i in data.topTen.list){
+		s+=data.topTen.list[i].percentage;
+	}
+	avgs= (s/data.topTen.list.length)*100;
+	avgs=avgs.toFixed(2);
+	return  avgs;
 }
